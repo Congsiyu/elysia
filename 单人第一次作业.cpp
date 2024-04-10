@@ -4,22 +4,22 @@
 #include<sstream>
 #include<time.h>
 #include<stdlib.h>
-#define MAX 10000//Êı¾İ¿â×î´óÈİÁ¿
+#define MAX 10000//æ•°æ®åº“æœ€å¤§å®¹é‡
 using namespace std;
-string num2str(int i)//Êı×Ö×ª×Ö·û´®
+string num2str(int i)//æ•°å­—è½¬å­—ç¬¦ä¸²
 {
 	stringstream ss;
 	ss << i;
 	return ss.str();
 }
-class drugs//¶¨ÒåÀà
+class drugs//å®šä¹‰ç±»
 {
 public:
-	string num;//Ò©Æ·±àºÅ
-	string name;//Ò©Æ·Ãû³Æ
-	double money;//µ¥¼Û
-	int fund;//¿âÓàÁ¿
-	int mai;//ÏúÊÛÁ¿
+	string num;//è¯å“ç¼–å·
+	string name;//è¯å“åç§°
+	double money;//å•ä»·
+	int fund;//åº“ä½™é‡
+	int mai;//é”€å”®é‡
 	drugs()
 	{
 		fund = -1;
@@ -27,7 +27,7 @@ public:
 		mai = 0;
 	}
 };
-void xie(fstream& fs, drugs arr[])//Ë¢ĞÂÊı¾İ¿â
+void xie(fstream& fs, drugs arr[])//åˆ·æ–°æ•°æ®åº“
 {
 	fs.close();
 	fs.open("data.txt", ios::out);
@@ -39,20 +39,20 @@ void xie(fstream& fs, drugs arr[])//Ë¢ĞÂÊı¾İ¿â
 	fs.open("data.txt", ios::in);
 
 }
-drugs* duqu(drugs sp[], fstream& file,int&i)//¶ÁÈ¡Êı¾İ¿â
+drugs* duqu(drugs sp[], fstream& file,int&i)//è¯»å–æ•°æ®åº“
 {
 	string line;
 	std::istringstream sin;
 	getline(file, line);
-	//string num;//Ò©Æ·±àºÅ
-	//string name;//Ò©Æ·Ãû³Æ
-	//double money;//µ¥¼Û
-	//int fund;//¿âÓàÁ¿
+	//string num;//è¯å“ç¼–å·
+	//string name;//è¯å“åç§°
+	//double money;//å•ä»·
+	//int fund;//åº“ä½™é‡
 	string cs;
 	while (getline(file, line))
 	{
 		sin.str(line);
-		getline(sin, cs, ',');//¶ÁÈ¡ĞòºÅ
+		getline(sin, cs, ',');//è¯»å–åºå·
 		for (int k = 0; k < 5; k++)
 		{
 			getline(sin, cs, ',');
@@ -82,23 +82,23 @@ drugs* duqu(drugs sp[], fstream& file,int&i)//¶ÁÈ¡Êı¾İ¿â
 	}
 	return sp;
 }
-void temp(drugs *str[], int* st,int top)//µÇ¼Çµ±ÌìÏúÊÛ¼ÇÂ¼
+void temp(drugs *str[], int* st,int top)//ç™»è®°å½“å¤©é”€å”®è®°å½•
 {
 	/*fstream file;*/
 	time_t now;
 	now = time(NULL);
 	struct tm* local;
 	local = localtime(&now);
-	string c = num2str(local->tm_year + 1900) + "Äê" + num2str(local->tm_mon + 1) + "ÔÂ" + num2str(local->tm_mday) + "ÈÕÏúÊÛ¼ÇÂ¼.csv";
+	string c = num2str(local->tm_year + 1900) + "å¹´" + num2str(local->tm_mon + 1) + "æœˆ" + num2str(local->tm_mday) + "æ—¥é”€å”®è®°å½•.csv";
 	fstream file;
 	fstream ofile;
 	file.open(c, ios::in);
-	//file.open(c, ios::out );//½¨Á¢»ò¶ÁÈ¡µ±ÌìÏúÊÛ±í¸ñ
+	//file.open(c, ios::out );//å»ºç«‹æˆ–è¯»å–å½“å¤©é”€å”®è¡¨æ ¼
 	if (!file)
 	{
 		file.close();
 		ofile.open(c, ios::out);
-		ofile << "ĞòºÅ" << "," << "Ò©Æ·±àºÅ" << "," << "Ò©Æ·Ãû³Æ" << "," << "ÁãÊÛ¼Û" << "," << "ÏúÊÛÁ¿" << "," << "×ÜÏúÊÛ¶î" << endl;
+		ofile << "åºå·" << "," << "è¯å“ç¼–å·" << "," << "è¯å“åç§°" << "," << "é›¶å”®ä»·" << "," << "é”€å”®é‡" << "," << "æ€»é”€å”®é¢" << endl;
 		ofile.close();
 		file.open(c, ios::in);
 	}
@@ -128,8 +128,8 @@ void temp(drugs *str[], int* st,int top)//µÇ¼Çµ±ÌìÏúÊÛ¼ÇÂ¼
 	}
 	file.close();
 	file.open(c, ios::out);
-	file << "ĞòºÅ" << "," << "Ò©Æ·±àºÅ" << "," << "Ò©Æ·Ãû³Æ" << "," << "ÁãÊÛ¼Û" << "," << "ÏúÊÛÁ¿" << "," << "×ÜÏúÊÛ¶î" << endl;
-	for (int s = 1; s < i; s++)//°´ÏúÊÛÁ¿´Ó´óµ½Ğ¡ÅÅĞò
+	file << "åºå·" << "," << "è¯å“ç¼–å·" << "," << "è¯å“åç§°" << "," << "é›¶å”®ä»·" << "," << "é”€å”®é‡" << "," << "æ€»é”€å”®é¢" << endl;
+	for (int s = 1; s < i; s++)//æŒ‰é”€å”®é‡ä»å¤§åˆ°å°æ’åº
 	{
 		for (int k = 1; k < i - s; k++)
 		{
@@ -147,15 +147,15 @@ void temp(drugs *str[], int* st,int top)//µÇ¼Çµ±ÌìÏúÊÛ¼ÇÂ¼
 	}
 	delete[]sp;
 }
-bool sxx(fstream &fs)//¹¤×÷½çÃæ
+bool sxx(fstream &fs)//å·¥ä½œç•Œé¢
 {
 	
 
 	string s;
-	//string num;//Ò©Æ·±àºÅ
-	//string name;//Ò©Æ·Ãû³Æ
-	//double money;//µ¥¼Û
-	//int fund;//¿âÓàÁ¿
+	//string num;//è¯å“ç¼–å·
+	//string name;//è¯å“åç§°
+	//double money;//å•ä»·
+	//int fund;//åº“ä½™é‡
 
 	int count;
 	drugs *arr=new drugs[MAX];
@@ -166,7 +166,7 @@ bool sxx(fstream &fs)//¹¤×÷½çÃæ
 		fs >> arr[i].money;
 		fs >> arr[i].fund;
 	}
-	cout << "ÇëÊäÈëÒ©Æ·±àºÅ¼°¹ºÂòÊıÁ¿£º(¿ÉÊäÈë¶à×éÊı¾İ£¬»Ø³µºó°´¡®#¡¯½áÊø)" << endl;
+	cout << "è¯·è¾“å…¥è¯å“ç¼–å·åŠè´­ä¹°æ•°é‡ï¼š(å¯è¾“å…¥å¤šç»„æ•°æ®ï¼Œå›è½¦åæŒ‰â€˜#â€™ç»“æŸ)" << endl;
 	cin >> s;
 	drugs* str[100];
 	int st[100] = { 0 };
@@ -177,13 +177,13 @@ bool sxx(fstream &fs)//¹¤×÷½çÃæ
 		for (i = 1; arr[i].fund != -1 && arr[i].num != s; i++) {}
 		if (arr[i].fund == -1)
 		{
-			cout << "Î´ËÑË÷µ½¶ÔÓ¦Ò©Æ·£¬Çë¼ì²éÄúµÄÊäÈëÊÇ·ñÓĞÎó   (Çë¼ÌĞøÊäÈëÒ©Æ·±àºÅ¼°¹ºÂòÊıÁ¿)" << endl;
+			cout << "æœªæœç´¢åˆ°å¯¹åº”è¯å“ï¼Œè¯·æ£€æŸ¥æ‚¨çš„è¾“å…¥æ˜¯å¦æœ‰è¯¯   (è¯·ç»§ç»­è¾“å…¥è¯å“ç¼–å·åŠè´­ä¹°æ•°é‡)" << endl;
 		}
 		else
 		{
 			while (arr[i].fund < count)
 			{
-				cout << "µ±Ç°¿â´æ²»×ã£¬ÇëÖØĞÂÊäÈë¹ºÂòÒ©Æ·ÊıÁ¿,°´'#'½áÊø¡£µ±Ç°¿â´æ£º" << arr[i].fund << endl;
+				cout << "å½“å‰åº“å­˜ä¸è¶³ï¼Œè¯·é‡æ–°è¾“å…¥è´­ä¹°è¯å“æ•°é‡,æŒ‰'#'ç»“æŸã€‚å½“å‰åº“å­˜ï¼š" << arr[i].fund << endl;
 				cin >> count;
 			}
 			st[t] = count;
@@ -191,9 +191,9 @@ bool sxx(fstream &fs)//¹¤×÷½çÃæ
 		}
 		cin >> s;
 	}
-	cout << "¹ºÎïÇåµ¥ÈçÏÂ:" << endl;
+	cout << "è´­ç‰©æ¸…å•å¦‚ä¸‹:" << endl;
 	cout << "\t\t\t\t*********************************************************" << endl;
-	cout << "\t\t\t\t*±àºÅ\t\tÃû³Æ\t\tµ¥¼Û\t\tÊıÁ¿ \t*" << endl;
+	cout << "\t\t\t\t*ç¼–å·\t\tåç§°\t\tå•ä»·\t\tæ•°é‡ \t*" << endl;
 	double tal = 0;
 	for (int k = 1; k < t; k++)
 	{
@@ -202,21 +202,21 @@ bool sxx(fstream &fs)//¹¤×÷½çÃæ
 	}
 	tal = ((int)(tal * 100)) / 100.0;
 	cout<< "\t\t\t\t*********************************************************" << endl;
-	cout << "\t\t\t\tºÏ¼Æ£º" << tal << "Ôª£¬ÊÇ·ñÈ·ÈÏÖ§¸¶(Y/N)£º";
+	cout << "\t\t\t\tåˆè®¡ï¼š" << tal << "å…ƒï¼Œæ˜¯å¦ç¡®è®¤æ”¯ä»˜(Y/N)ï¼š";
 	char x;
 	cin >> x;
 	while (x != 'Y' && x != 'N')
 	{
-		cout << "ÊäÈë¸ñÊ½´íÎó£¬ÇëÖØĞÂÊäÈë!" << endl;
-		cout << "ÊÇ·ñÈ·ÈÏÖ§¸¶(Y / N)£º";
+		cout << "è¾“å…¥æ ¼å¼é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥!" << endl;
+		cout << "æ˜¯å¦ç¡®è®¤æ”¯ä»˜(Y / N)ï¼š";
 		cin >> x;
 	}
 	if (x == 'Y')
 	{
-		cout << "ÇëÊäÈëÊÕ¿î½ğ¶î£º" << endl;
+		cout << "è¯·è¾“å…¥æ”¶æ¬¾é‡‘é¢ï¼š" << endl;
 		double m;
 		cin >> m;
-		cout << "Ó¦ÕÒÁã£º" << m - tal << "Ôª" << endl;
+		cout << "åº”æ‰¾é›¶ï¼š" << m - tal << "å…ƒ" << endl;
 		for (int k = 1; k < t; k++)
 		{
 			str[k]->fund -= st[k];
@@ -226,15 +226,15 @@ bool sxx(fstream &fs)//¹¤×÷½çÃæ
 	}
 	else
 	{
-		cout << "¶©µ¥ÒÑÈ¡Ïû£¡" << endl;
+		cout << "è®¢å•å·²å–æ¶ˆï¼" << endl;
 	}
-	cout << "ÇëÑ¡Ôñ£º1.¼ÌĞø    2.·µ»ØÉÏÒ»²ã" << endl;
+	cout << "è¯·é€‰æ‹©ï¼š1.ç»§ç»­    2.è¿”å›ä¸Šä¸€å±‚" << endl;
 	int c = 0;
 	cin >> c;
 	while (c != 1 && c != 2)
 	{
-		cout << "ÊäÈë¸ñÊ½´íÎó£¬ÇëÖØĞÂÊäÈë!" << endl;
-		cout << "ÇëÑ¡Ôñ£º1.¼ÌĞø    2.·µ»ØÉÏÒ»²ã" << endl; 
+		cout << "è¾“å…¥æ ¼å¼é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥!" << endl;
+		cout << "è¯·é€‰æ‹©ï¼š1.ç»§ç»­    2.è¿”å›ä¸Šä¸€å±‚" << endl; 
 		cin >> c;
 	}
 	if (c == 1)
@@ -249,7 +249,7 @@ bool sxx(fstream &fs)//¹¤×÷½çÃæ
 		return 0;
 	}
 }
-string zhuan(double value, int digits)//Ğ¡Êı×ª×Ö·û´®
+string zhuan(double value, int digits)//å°æ•°è½¬å­—ç¬¦ä¸²
 {
 
 	double val1 = value;
@@ -270,25 +270,25 @@ string zhuan(double value, int digits)//Ğ¡Êı×ª×Ö·û´®
 
 	return result;
 }
-void chaxun(int days,fstream&fs)//²éÕÒÍùÈÕ¼ÇÂ¼
+void chaxun(int days,fstream&fs)//æŸ¥æ‰¾å¾€æ—¥è®°å½•
 {
 	time_t now;
 	now = time(NULL);
 	struct tm* local;
 	local = localtime(&now);
-	string c = num2str(local->tm_year + 1900) + "Äê" + num2str(local->tm_mon + 1) + "ÔÂ" + num2str(local->tm_mday) + "ÈÕÏúÊÛ¼ÇÂ¼.csv";
-	string x = to_string(days) + "ÈÕÄÚÏúÊÛ×Ü½á(" + num2str(local->tm_year + 1900) + "." + num2str(local->tm_mon + 1) + "." + num2str(local->tm_mday) + " "+ num2str(local->tm_hour)+"."+ num2str(local->tm_min)+"."+ num2str(local->tm_sec)+").csv";
+	string c = num2str(local->tm_year + 1900) + "å¹´" + num2str(local->tm_mon + 1) + "æœˆ" + num2str(local->tm_mday) + "æ—¥é”€å”®è®°å½•.csv";
+	string x = to_string(days) + "æ—¥å†…é”€å”®æ€»ç»“(" + num2str(local->tm_year + 1900) + "." + num2str(local->tm_mon + 1) + "." + num2str(local->tm_mday) + " "+ num2str(local->tm_hour)+"."+ num2str(local->tm_min)+"."+ num2str(local->tm_sec)+").csv";
 	time(&now);
 	//local = localtime(&now);
 	//cout << local->tm_mday;
 	fstream file,ofile;
 	file.open(x, ios::out);
-	file << "ĞòºÅ" << "," << "Ò©Æ·±àºÅ" << "," << "Ò©Æ·Ãû³Æ" << "," << "ÁãÊÛ¼Û" << "," << "ÏúÊÛÁ¿" << "," << "×ÜÏúÊÛ¶î"<<","<<"¿âÓàÁ¿" << endl;
+	file << "åºå·" << "," << "è¯å“ç¼–å·" << "," << "è¯å“åç§°" << "," << "é›¶å”®ä»·" << "," << "é”€å”®é‡" << "," << "æ€»é”€å”®é¢"<<","<<"åº“ä½™é‡" << endl;
 	drugs* tol = new drugs[MAX];
 	int lon = 1;
 	for (int is = 0; is < days; is++)
 	{
-		ofile.open(num2str(local->tm_year + 1900) + "Äê" + num2str(local->tm_mon + 1) + "ÔÂ" + num2str(local->tm_mday) + "ÈÕÏúÊÛ¼ÇÂ¼.csv", ios::in);
+		ofile.open(num2str(local->tm_year + 1900) + "å¹´" + num2str(local->tm_mon + 1) + "æœˆ" + num2str(local->tm_mday) + "æ—¥é”€å”®è®°å½•.csv", ios::in);
 		if (ofile.is_open())
 		{
 			drugs* sp = new drugs[MAX];
@@ -317,16 +317,16 @@ void chaxun(int days,fstream&fs)//²éÕÒÍùÈÕ¼ÇÂ¼
 		local = localtime(&now);
 	}
 	int co = 0;
-	cout << "ÇëÑ¡ÔñÅÅĞò·½Ê½:1.°´ÏúÊÛ¶î´Ó´óµ½Ğ¡ÅÅĞò    2.°´ÏúÊÛÁ¿´Ó´óµ½Ğ¡ÅÅĞò    3.°´µ¥¼Û´Ó´óµ½Ğ¡ÅÅĞò" << endl;
+	cout << "è¯·é€‰æ‹©æ’åºæ–¹å¼:1.æŒ‰é”€å”®é¢ä»å¤§åˆ°å°æ’åº    2.æŒ‰é”€å”®é‡ä»å¤§åˆ°å°æ’åº    3.æŒ‰å•ä»·ä»å¤§åˆ°å°æ’åº" << endl;
 	cin >> co;
 	if (co != 1 && co != 2&&co!=3)
 	{
-		cout << "ÊäÈë¸ñÊ½´íÎó£¬ÇëÖØĞÂÊäÈë:" << endl;
+		cout << "è¾“å…¥æ ¼å¼é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥:" << endl;
 		cin >> co;
 	}
 	if(co==1)
 	{ 
-		for (int i = 1; i < lon; i++)//°´ÏúÊÛ¶î´Ó´óµ½Ğ¡ÅÅĞò
+		for (int i = 1; i < lon; i++)//æŒ‰é”€å”®é¢ä»å¤§åˆ°å°æ’åº
 		{
 			for (int k = 1; k < lon -i; k++)
 			{
@@ -341,7 +341,7 @@ void chaxun(int days,fstream&fs)//²éÕÒÍùÈÕ¼ÇÂ¼
 	}
 	if (co == 2)
 	{
-		for (int i = 1; i < lon; i++)//°´ÏúÊÛÁ¿´Ó´óµ½Ğ¡ÅÅĞò
+		for (int i = 1; i < lon; i++)//æŒ‰é”€å”®é‡ä»å¤§åˆ°å°æ’åº
 		{
 			for (int k = 1; k < lon -i; k++)
 			{
@@ -356,7 +356,7 @@ void chaxun(int days,fstream&fs)//²éÕÒÍùÈÕ¼ÇÂ¼
 	}
 	if (co == 3)
 	{
-		for (int i = 1; i < lon; i++)//°´µ¥¼Û´Ó´óµ½Ğ¡ÅÅĞò
+		for (int i = 1; i < lon; i++)//æŒ‰å•ä»·ä»å¤§åˆ°å°æ’åº
 		{
 			for (int k = 1; k < lon -i; k++)
 			{
@@ -372,7 +372,7 @@ void chaxun(int days,fstream&fs)//²éÕÒÍùÈÕ¼ÇÂ¼
 	string s;
 	drugs* arr = new drugs[MAX];
 	int i = 0;
-	for ( i = 1; i<MAX && fs >> s; i++)//µ¼ÈëÊı¾İ¿â
+	for ( i = 1; i<MAX && fs >> s; i++)//å¯¼å…¥æ•°æ®åº“
 	{
 		arr[i].num = s;
 		fs >> arr[i].name;
@@ -393,7 +393,7 @@ void chaxun(int days,fstream&fs)//²éÕÒÍùÈÕ¼ÇÂ¼
 		}
 		if (!flag)
 		{
-			cout << "±àºÅ:" << tol[k].num << "µÄÒ©Æ·ÒÑ´ÓÊı¾İ¿âÉ¾³ı£¬µ±Ç°ÎŞ¿â´æ" << endl;
+			cout << "ç¼–å·:" << tol[k].num << "çš„è¯å“å·²ä»æ•°æ®åº“åˆ é™¤ï¼Œå½“å‰æ— åº“å­˜" << endl;
 		}
 	}
 	for (int i = 1; i < lon; i++)
@@ -401,17 +401,17 @@ void chaxun(int days,fstream&fs)//²éÕÒÍùÈÕ¼ÇÂ¼
 		double x = tol[i].money * tol[i].mai;
 		file << num2str(i) << "," << tol[i].num << "," << tol[i].name << "," << tol[i].money << "," << tol[i].mai << "," << zhuan(x, 2)<<","<<tol[i].fund<<endl;
 	}
-	cout << "Éú³É³É¹¦" << endl;
+	cout << "ç”ŸæˆæˆåŠŸ" << endl;
 	delete[]tol;
 	file.close();
 }
-void start()//Ö÷½çÃæ
+void start()//ä¸»ç•Œé¢
 {
 
 
 	fstream file;
 	file.open("data.txt", ios::in);
-	if (!file.is_open())//Èç¹û"data.txt"ÎÄ¼ş²»´æÔÚ
+	if (!file.is_open())//å¦‚æœ"data.txt"æ–‡ä»¶ä¸å­˜åœ¨
 	{
 		file.close();
 		file.open("data.txt", ios::out);
@@ -420,16 +420,16 @@ void start()//Ö÷½çÃæ
 	}
 	char bbb;
 	file >> bbb;
-	if (file.eof())//ÅĞ¶ÏÊı¾İ¿âÊÇ·ñÎª¿Õ
+	if (file.eof())//åˆ¤æ–­æ•°æ®åº“æ˜¯å¦ä¸ºç©º
 	{
 		file.close();
 		file.open("data.txt", ios::out);
-		cout << "¼ì²âµ½µ±Ç°Ò©Æ·¿âÎª¿Õ£¬ÇëÊäÈëÒ©Æ·¿â´æĞÅÏ¢:" << endl;
-		cout << "ÇëÒÀ´ÎÊäÈëÃ¿ÖÖÒ©Æ·±àºÅ£¬Ò©Æ·Ãû³Æ£¬µ¥¼Û(Ôª)£¬¿âÓàÁ¿(¸ö)£¬»Ø³µºó°´¡®#¡¯½áÊø" << endl;
-		string num;//Ò©Æ·±àºÅ
-		string name;//Ò©Æ·Ãû³Æ
-		double money;//µ¥¼Û
-		int fund;//¿âÓàÁ¿
+		cout << "æ£€æµ‹åˆ°å½“å‰è¯å“åº“ä¸ºç©ºï¼Œè¯·è¾“å…¥è¯å“åº“å­˜ä¿¡æ¯:" << endl;
+		cout << "è¯·ä¾æ¬¡è¾“å…¥æ¯ç§è¯å“ç¼–å·ï¼Œè¯å“åç§°ï¼Œå•ä»·(å…ƒ)ï¼Œåº“ä½™é‡(ä¸ª)ï¼Œå›è½¦åæŒ‰â€˜#â€™ç»“æŸ" << endl;
+		string num;//è¯å“ç¼–å·
+		string name;//è¯å“åç§°
+		double money;//å•ä»·
+		int fund;//åº“ä½™é‡
 		while (1)
 		{
 			cin >> num;
@@ -440,27 +440,27 @@ void start()//Ö÷½çÃæ
 			cin >> name >> money >> fund;
 			file << num<<" "<< name << " " << money << " " << fund<<endl;
 		}
-		cout << "ÉèÖÃÒÑÍê³É£¡" << endl;
+		cout << "è®¾ç½®å·²å®Œæˆï¼" << endl;
 		file.close();
 		file.open("data.txt", ios::in);
 	}
-	file.seekg(0, ios::beg);//»Øµ½ÎÄ¼ş¿ªÍ·
+	file.seekg(0, ios::beg);//å›åˆ°æ–‡ä»¶å¼€å¤´
 	int a=1;
 	while (a != 4)
 	{
-		cout << "\t\t\t\t\t»¶Ó­Ê¹ÓÃË¼ÓêÒ©Æ·ÏúÊÛÍ³¼ÆÏµÍ³" << endl;
-		cout << "\t\t1.¿ªÊ¼½ñÈÕ¹¤×÷    2.ÏúÊÛ×Ü½áµ¼³ö    3.¸ü¸ÄÒ©Æ·¿â    4.ÍË³ö       (ÇëÊäÈëĞòºÅÖ´ĞĞ¶ÔÓ¦²Ù×÷)" << endl;
+		cout << "\t\t\t\t\tæ¬¢è¿ä½¿ç”¨æ€é›¨è¯å“é”€å”®ç»Ÿè®¡ç³»ç»Ÿ" << endl;
+		cout << "\t\t1.å¼€å§‹ä»Šæ—¥å·¥ä½œ    2.é”€å”®æ€»ç»“å¯¼å‡º    3.æ›´æ”¹è¯å“åº“    4.é€€å‡º       (è¯·è¾“å…¥åºå·æ‰§è¡Œå¯¹åº”æ“ä½œ)" << endl;
 		cin >> a;
 		while (a != 1 && a != 2 && a != 3 && a != 4)
 		{
-			cout << "ÄúµÄÊäÈë²»·ûºÏ¹æ·¶£¬ÇëÖØĞÂÊäÈë;" << endl;
+			cout << "æ‚¨çš„è¾“å…¥ä¸ç¬¦åˆè§„èŒƒï¼Œè¯·é‡æ–°è¾“å…¥;" << endl;
 			cin >> a;
 		}
 		int day = 0;
-		string num;//Ò©Æ·±àºÅ
-		string name;//Ò©Æ·Ãû³Æ
-		double money;//µ¥¼Û
-		int fund;//¿âÓàÁ¿
+		string num;//è¯å“ç¼–å·
+		string name;//è¯å“åç§°
+		double money;//å•ä»·
+		int fund;//åº“ä½™é‡
 		switch (a)
 		{
 		case 1:
@@ -471,14 +471,14 @@ void start()//Ö÷½çÃæ
 			}
 			break;
 		case 2:
-			cout << "ÄúÒª²éÑ¯×î½ü¶àÉÙÌìµÄÏúÊÛÇé¿ö£º";
+			cout << "æ‚¨è¦æŸ¥è¯¢æœ€è¿‘å¤šå°‘å¤©çš„é”€å”®æƒ…å†µï¼š";
 			cin >> day;
 			chaxun(day, file);
 			file.close();
 			file.open("data.txt", ios::in);
 			break;
 		case 3:
-			cout << "ÇëÒÀ´ÎÊäÈëÃ¿ÖÖÒ©Æ·±àºÅ£¬Ò©Æ·Ãû³Æ£¬µ¥¼Û(Ôª)£¬¿âÓàÁ¿(¸ö)£¬»Ø³µºó°´¡®#¡¯½áÊø" << endl;
+			cout << "è¯·ä¾æ¬¡è¾“å…¥æ¯ç§è¯å“ç¼–å·ï¼Œè¯å“åç§°ï¼Œå•ä»·(å…ƒ)ï¼Œåº“ä½™é‡(ä¸ª)ï¼Œå›è½¦åæŒ‰â€˜#â€™ç»“æŸ" << endl;
 			file.close();
 			file.open("data.txt", ios::out);
 			while (1)
@@ -491,13 +491,13 @@ void start()//Ö÷½çÃæ
 				cin >> name >> money >> fund;
 				file << num << " " << name << " " << money << " " << fund << endl;
 			}
-			cout << "ÉèÖÃÒÑÍê³É£¡" << endl;
+			cout << "è®¾ç½®å·²å®Œæˆï¼" << endl;
 			file.close();
 			file.open("data.txt", ios::in);
 			break;
 		case 4:
 			file.close();
-			cout << "»¶Ó­ÏÂ´ÎÊ¹ÓÃ" << endl;
+			cout << "æ¬¢è¿ä¸‹æ¬¡ä½¿ç”¨" << endl;
 			return;
 		}
 	}
