@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 const int INF = 0x3f3f3f3f;
-int arr[] = { 0,-31,-41,-59,-26,-53,-58,-97,-93,-23,-84 };//0不算,下标从1算
+int arr[] = { 0,-31,-41,-59,-26,-53,-58,-97,-93,-23,-84 };
 int cnt = 10;
 int MaxSum() {
     int res = -INF, sum = 0;
